@@ -34,4 +34,21 @@ int main() {
             current_bucket -= output_rate;
     }
     return 0;
-}
+} 
+
+
+OUTPUT:
+
+Enter bucket capacity: 10
+Enter output rate: 5
+Enter number of time intervals: 4
+Enter number of packets arriving at each interval:
+6 7 2 8
+
+Time	Packets Incoming    Packets Sent    Packets Left    Packets Dropped
+1	    	6		            5		        1		        0
+2	    	7	        	    5		        3		        0
+3	    	2	        	    5	        	0		        0
+4	    	8	        	    5		        3		        1
+
+
