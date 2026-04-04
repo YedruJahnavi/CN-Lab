@@ -59,3 +59,38 @@ Length  : 160 bits  (40 hex chars) --------------------------------------
 Input   : (empty string) 
 SHA-1   : da39a3ee5e6b4b0d3255bfef95601890afd80709 
 Length  : 160 bits  (40 hex chars) -------------------------------------- 
+
+
+Aim: 
+
+To write a Java program that computes the SHA-1 (Secure Hash Algorithm 1) message digest 
+of a given text string using Java's built-in MessageDigest class, and displays the resulting 160
+bit hash value as a 40-character hexadecimal string. 
+
+Theory: 
+
+A message digest (also called a cryptographic hash) is a fixed-size numeric fingerprint of an 
+arbitrary-length input. It is produced by a one-way hash function — meaning it is 
+computationally infeasible to reverse the digest back to the original message, or to find two 
+different messages that produce the same digest. 
+
+SHA-1 (Secure Hash Algorithm 1): 
+
+SHA-1 was designed by the National Security Agency (NSA) and published by NIST in 1995 as FIPS PUB 180-1. 
+It produces a 160-bit (20-byte) message digest, typically represented as a 40-character hexadecimal string. 
+SHA-1 processes input messages in 512-bit blocks through 80 rounds of bitwise logical operations and modular additions. 
+
+Algorithm: 
+
+1. Read the input message string to be hashed. 
+2. Convert the input string to a byte array using getBytes(). 
+3. Obtain a MessageDigest instance for SHA-1 using MessageDigest.getInstance("SHA 1"). 
+4. Pre-process the message: append a '1' bit to the end of the message, then pad with '0' bits until the message length is 64 bits short of a multiple of 512 bits, and finally append the original message length as a 64-bit big-endian integer. 
+5. Initialise five 32-bit hash values (H0 to H4) with SHA-1 constants: H0=67452301, H1=EFCDAB89, H2=98BADCFE, H3=10325476, H4=C3D2E1F0. 
+6. Process the padded message in 512-bit (64-byte) blocks; for each block, expand the 16 words (W0–W15) into 80 words using: Wt = (Wt-3 XOR Wt-8 XOR Wt-14 XOR Wt-16) left-rotated by 1.
+7. Perform 80 rounds divided into four 20-round stages, each using a different logical function (F, G, H, I) and a round constant (K); update the five working variables (a, b, c, d, e) per round. 
+8. After processing all blocks, the final hash is the concatenation of the five 32-bit values H0–H4, producing a 160-bit (20-byte) message digest. 
+9. Call md.digest(inputBytes) which internally performs steps 4 through 8 and returns the 20-byte hash array. 
+10. Convert each byte of the 20-byte array to a 2-character hexadecimal string; prepend '0' if the hex value is a single digit to maintain fixed width. 
+11. Concatenate all hex strings to form the final 40-character hexadecimal SHA-1 digest. 
+12. Display the original message, its SHA-1 digest, and the digest length (always 160 bits).
