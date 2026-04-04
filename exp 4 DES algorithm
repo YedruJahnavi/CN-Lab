@@ -52,3 +52,42 @@ Original Text   : Hi! Who are you?
 DES Key (Base64): NKHpBIyh6R8= 
 Encrypted Text  : Sm3p9789a/DJntQoOVGAO/0+3ancW/AA 
 Decrypted Text  : Hi! Who are you? 
+
+
+Aim:
+
+To write a Java program to implement the Data Encryption Standard (DES) algorithm for 
+encrypting and decrypting a given plaintext message using a secret key. 
+
+Theory: 
+
+The Data Encryption Standard (DES) is a symmetric-key block cipher that was adopted as a 
+federal standard in 1977. It encrypts data in 64-bit blocks using a 56-bit key and employs a 
+Feistel network structure with 16 rounds of processing. 
+
+Key characteristics of DES: 
+
+• Block Size: DES operates on 64-bit (8-byte) blocks of plaintext. 
+• Key Size: The key is 64 bits long, but only 56 bits are used for encryption (8 bits are used for parity checks). 
+• Rounds: DES performs 16 rounds of the Feistel cipher structure. 
+• Sub-keys: 16 different 48-bit sub-keys are derived from the original 56-bit key using a key schedule. 
+• S-Boxes: 8 substitution boxes (S-Boxes) provide the non-linear confusion property essential for security. 
+• Permutations: Initial Permutation (IP) and Final Permutation (FP) are applied at the start and end. 
+• Each round of DES takes the 64-bit block, splits it into a 32-bit Left half (L) and a 32 bit Right half (R), and applies the Feistel function F using the sub-key.  
+• The result of one round is:  
+• 𝐿𝑖+1=  𝐿𝑖 ⊕𝐹(𝑅𝑖, 𝐾) 
+• 𝑅𝑖+1=  𝑅𝑖 
+• Decryption in DES uses the same algorithm but applies the sub-keys in reverse order. 
+• In Java, DES is implemented using the javax.crypto package with Cipher.getInstance("DES/ECB/PKCS5Padding"), which handles the full 16-round encryption and decryption internally.
+
+Algorithm: 
+
+1. Read the plaintext message to be encrypted. 
+2. Generate a 56-bit DES secret key using KeyGenerator. 
+3. Initialize the Cipher object in ENCRYPT_MODE with the DES key. 
+4. Apply Initial Permutation (IP) on the 64-bit plaintext block. 
+5. Perform 16 rounds of Feistel network: split block into Left (L) and Right (R) halves, apply expansion permutation, XOR with round key, pass through S-Boxes, apply permutation. 
+6. Apply Final Permutation (FP) to produce the 64-bit ciphertext block. 
+7. Encode the ciphertext bytes using Base64 for readable output. 
+8. For decryption, initialize the Cipher in DECRYPT_MODE and apply the same 16 rounds in reverse order with sub-keys used in reverse. 
+9. Display the original, encrypted, and decrypted text.
