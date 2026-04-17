@@ -1,0 +1,35 @@
+import java.util.*; 
+public class Crypto  { 
+static void hillCipher() 
+    { 
+        int[][] key = {{3, 3}, {2, 5}}; 
+        String text = "HI"; 
+        int[] msg = new int[2]; 
+        int[] res = new int[2]; 
+        for (int i = 0; i < 2; i++) 
+            msg[i] = text.charAt(i) - 'A'; 
+        for (int i = 0; i < 2; i++) 
+        { 
+            res[i] = 0; 
+            for (int j = 0; j < 2; j++) 
+                res[i] += key[i][j] * msg[j]; 
+ 
+            res[i] %= 26; 
+        } 
+        System.out.print("Hill Cipher Encrypted: "); 
+        for (int i = 0; i < 2; i++) 
+            System.out.print((char)(res[i] + 'A')); 
+        System.out.println(); 
+    } 
+    public static void main(String[] args) 
+    { 
+        String text = "HELLO"; 
+        int key = 3; 
+        System.out.println("Original Text: " + text); 
+        hillCipher(); 
+    }
+}
+
+
+Original Text: HELLO
+Hill Cipher Encrypted: TC
